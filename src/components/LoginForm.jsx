@@ -13,6 +13,11 @@ export default function LoginForm() {
     const handleClick = async () => {
         dispatch({type: 'SET_LOADING'});
         const result = await loginUser(username, password);
+        console.log(result);
+
+        if (result.error) {
+            return dispatch({type: 'USER_AUTH_ERROR', payload: result.error})
+        }
 
         dispatch({type: 'USER_LOGIN', payload: JSON.stringify(result)});
         navigate('/shop')
@@ -22,7 +27,7 @@ export default function LoginForm() {
         <form onSubmit={(e) => e.preventDefault()}>
             <label>Username</label>
             <input type="text" value={username} onChange={e => setUsername(e.target.value)}/>
-            <label>Username</label>
+            <label>Password</label>
             <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>
             <button type="submit" onClick={() => handleClick()}>Login</button>
         </form>

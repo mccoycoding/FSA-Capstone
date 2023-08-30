@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { logoutUser } from "../context/AuthContext/AuthActions"
 
 export default function NavBar() {
-    const {user, dispatch} = useContext(AuthContext)
+    const {user, dispatch} = useContext(AuthContext);
 
     const handleLogout = () => {
         logoutUser();

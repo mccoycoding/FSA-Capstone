@@ -4,7 +4,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     //Pull userToken if it exists
-    const user = JSON.parse(sessionStorage.getItem('userToken'));
+    const user = sessionStorage.getItem('user');
 
 
     //Set initial state
