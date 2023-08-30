@@ -22,9 +22,3 @@ export async function fetchSingleProduct(id) {
         console.error(`ERROR FETCHING ITEM#${id}: ${error}`);
     }
 };
-
-export {
-    URL,
-    fetchAllProducts,
-    fetchSingleProduct,
-}
