@@ -13,13 +13,8 @@ export default function LoginForm() {
     const handleClick = async () => {
         dispatch({type: 'SET_LOADING'});
         const result = await loginUser(username, password);
-        console.log(result)
 
-        if (result.error) {
-            return dispatch({type: 'USER_AUTH_ERROR', payload: result.error})
-        }
-
-        dispatch({type: 'USER_LOGIN', payload: result});
+        dispatch({type: 'USER_LOGIN', payload: JSON.stringify(result)});
         navigate('/shop')
     }
 

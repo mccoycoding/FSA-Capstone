@@ -2,16 +2,21 @@ import { URL } from '../../helpers/fetchRequests'
 
 export const loginUser = async (username, password) => {
     try {
+        const body = {
+            username: username,
+            password: password
+        }
         const response = await fetch(`${URL}/auth/login`, {
             method: 'POST',
-            body: JSON.stringify({
-                username: username,
-                password: password
-            })
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body)
         });
         const result = await response.json();
-        if (result.data.token) {
-            sessionStorage.setItem('userToken', JSON.stringify(result.data.token));
+        console.log(result)
+        if (result.token) {
+            sessionStorage.setItem('userToken', JSON.stringify(result.token));
             return result.data
         }
     } catch (error) {

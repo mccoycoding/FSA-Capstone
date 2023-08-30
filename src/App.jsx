@@ -2,7 +2,7 @@ import Login from "./pages/Login"
 import Shop from "./pages/Shop"
 import NavBar from "./components/NavBar"
 import { AuthProvider } from "./context/AuthContext/AuthContext"
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 function App() {
 
