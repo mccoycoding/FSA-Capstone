@@ -1,4 +1,4 @@
-const URL = "https://fakestoreapi.com"
+export const URL = "https://fakestoreapi.com"
 
 //GET Products
 export async function fetchAllProducts(page) {
@@ -22,3 +22,9 @@ export async function fetchSingleProduct(id) {
         console.error(`ERROR FETCHING ITEM#${id}: ${error}`);
     }
 };
+
+export {
+    URL,
+    fetchAllProducts,
+    fetchSingleProduct,
+}
