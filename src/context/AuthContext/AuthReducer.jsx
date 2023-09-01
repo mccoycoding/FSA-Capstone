@@ -5,7 +5,7 @@ const authReducer = (state, action) => {
                 ...state,
                 user: action.payload,
                 isLoading: false,
-                isError: true,
+                isError: false,
             };
         case 'USER_LOGOUT':
             return {
@@ -28,7 +28,7 @@ const authReducer = (state, action) => {
             }
         default:
             return state;
-    };
+    }
 };
 
 export default authReducer;
