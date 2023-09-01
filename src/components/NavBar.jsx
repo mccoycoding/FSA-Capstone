@@ -1,14 +1,24 @@
 import { Link } from "react-router-dom"
 import AuthContext from "../context/AuthContext/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { logoutUser } from "../context/AuthContext/AuthActions"
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
     const {user, dispatch} = useContext(AuthContext);
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/");
+        }
+        navigate("/shop")
+    }, [user]);
 
     const handleLogout = () => {
         logoutUser();
         dispatch({type: 'USER_LOGOUT'})
+        navigate("/")
     }
 
     return (
