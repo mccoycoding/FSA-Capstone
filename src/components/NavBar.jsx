@@ -20,7 +20,7 @@ export default function NavBar() {
             )}
             <Link to='/shop'>Shop</Link>
             {user && (
-                <Link to='/' onClick={handleLogout()}>Logout</Link>
+                <Link to='/' onClick={() => handleLogout()}>Logout</Link>
             )}
         </div>
     )
