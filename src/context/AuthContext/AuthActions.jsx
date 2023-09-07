@@ -20,7 +20,7 @@ export const loginUser = async (username, password) => {
         }
 
         if (result.token) {
-            sessionStorage.setItem('user', result.token);
+            localStorage.setItem('userToken', result.token);
             return result.token
         }
     } catch (error) {
@@ -33,4 +33,4 @@ export const loginUser = async (username, password) => {
     };
 };
 
-export const logoutUser = async () => await sessionStorage.removeItem('user')
+export const logoutUser = async () => await localStorage.removeItem('userToken')

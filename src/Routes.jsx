@@ -3,6 +3,7 @@ import App from "./App.jsx"
 import Home from "./pages/Home.jsx"
 import Login from "./pages/Login.jsx"
 import Shop from "./pages/Shop.jsx"
+import Cart from "./pages/Cart.jsx"
 
 const rootChilden = [
     {
@@ -16,6 +17,10 @@ const rootChilden = [
     {
         path: "/shop",
         element: <Shop />,
+    },
+    {
+        path: "/checkout",
+        element: <Cart />,
     }
 ]
 
