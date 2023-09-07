@@ -8,13 +8,6 @@ export default function NavBar() {
     const {user, dispatch} = useContext(AuthContext);
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (!user) {
-            navigate("/");
-        }
-        navigate("/shop")
-    }, [user]);
-
     const handleLogout = () => {
         logoutUser();
         dispatch({type: 'USER_LOGOUT'})
@@ -25,12 +18,12 @@ export default function NavBar() {
         <div>
             <h1>Unlucky Tanooki</h1>
             <h2>Your one stop shop</h2>
-            {!user && (
-                <Link to='/'>Login</Link>
-            )}
+            <Link to="/">Home</Link>
             <Link to='/shop'>Shop</Link>
-            {user && (
-                <Link to='/' onClick={() => handleLogout()}>Logout</Link>
+            {!user ? (
+                <Link to="/login">Login</Link>
+            ) : (
+                <Link to="/login" onClick={() => handleLogout()}>Logout</Link>
             )}
         </div>
     )
