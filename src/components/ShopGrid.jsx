@@ -1,8 +1,9 @@
+import { addToCart } from "../helpers/cartFunctions";
 
 
 export default function ShopGrid( {inventory} ){
 
-
+    
 
     return (
         <div>
@@ -12,7 +13,7 @@ export default function ShopGrid( {inventory} ){
                     <h2>{product.title}</h2>
                     <img style={{maxWidth: '250px'}} src={product.image}/>
                     <h3>${product.price.toFixed(2)}</h3>
-                    <button className="btn btn-primary me-1">Add to Cart</button>
+                    <button onClick={() => addToCart(product)} className="btn btn-primary me-1">Add to Cart</button>
                     <button className="btn btn-secondary">More Details</button>
                 </div>
             ))
