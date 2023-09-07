@@ -20,8 +20,8 @@ export default function Shop() {
     // console.log(inventory)
 
     return (
-        <div>
-            <h1>SHOP</h1>
+        <div className="container-fluid">
+            
             <ShopGrid inventory={inventory}/>
         </div>
         

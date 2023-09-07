@@ -10,9 +10,10 @@ export default function ShopGrid( {inventory} ){
             inventory.map(product => (
                 <div key={product.id}>
                     <h2>{product.title}</h2>
-                    <img src={product.image}/>
+                    <img style={{maxWidth: '250px'}} src={product.image}/>
                     <h3>${product.price.toFixed(2)}</h3>
-                    <p>{product.description}</p>
+                    <button className="btn btn-primary me-1">Add to Cart</button>
+                    <button className="btn btn-secondary">More Details</button>
                 </div>
             ))
          ) : (
