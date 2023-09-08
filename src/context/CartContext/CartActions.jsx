@@ -11,7 +11,7 @@ export function getCart() {
     }
     //return cart
     return JSON.parse(cart)
-};
+}
 
 // Get cart, then add an item to the cart and return true to indicate success, else false
 export function addToCart(obj) {
@@ -25,7 +25,7 @@ export function addToCart(obj) {
         console.error('Error adding to cart:', error)
         return false 
     }
-};
+}
 
 // Remove an item from the cart based on id
 export function removeItemFromCart(id) {
@@ -38,10 +38,10 @@ export function removeItemFromCart(id) {
     } catch (error) {
         
     }
-};
+}
 
 // Clear entire cart
 export function clearCart() {
     const emptyCart = []
     localStorage.setItem('cart', JSON.stringify(emptyCart))
-};
+}

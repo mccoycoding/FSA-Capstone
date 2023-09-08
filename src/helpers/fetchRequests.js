@@ -10,7 +10,7 @@ export async function fetchAllProducts(page) {
     } catch (error) {
         console.error(`ERROR FETCHING ALL PRODUCTS: ${error}`);
     }
-};
+}
 
 //GET Single Product
 export async function fetchSingleProduct(id) {
@@ -21,4 +21,4 @@ export async function fetchSingleProduct(id) {
     } catch (error) {
         console.error(`ERROR FETCHING ITEM#${id}: ${error}`);
     }
-};
+}
