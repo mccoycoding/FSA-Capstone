@@ -1,36 +1,105 @@
-import { useContext } from "react"
-import  CartProvider  from "../context/CartContext/CartContext"
-import { getCart, removeItemFromCart } from "../context/CartContext/CartActions"
+import { useContext, useState, useEffect } from "react";
+import CartProvider from "../context/CartContext/CartContext";
+import { removeItemFromCart } from "../context/CartContext/CartActions";
+import CartCard from "./CartCard";
 
 export default function CartCheckout() {
-    const {cart, dispatch} = useContext(CartProvider)
+  const { cart, dispatch } = useContext(CartProvider);
+  const [countedCart, setCountedCart] = useState([]);
 
-    const handleRemoveFromCart = async (id) => {
-        dispatch({type: "SET_LOADING"})
-        const result = await removeItemFromCart(id)
+  const handleRemoveFromCart = async (id) => {
+    dispatch({ type: "SET_LOADING" });
+    const result = await removeItemFromCart(id);
 
-        if (result === true){
-            dispatch({type: "REMOVE_FROM_CART", payload: id})
-        }
+    if (result === true) {
+      dispatch({ type: "REMOVE_FROM_CART", payload: id });
     }
+  };
 
-    return (
+  const getTotal = () => {
+    let total = 0;
+    countedCart.forEach((product) => {
+      total += product.price * product.quantity;
+    });
+    return total;
+  };
+
+  const updateQuantity = (id, newQuantity) => {
+    // Find the item in countedCart with the given ID
+    const updatedCart = countedCart.map((product) => {
+      if (product.id === id) {
+        return {
+          ...product,
+          quantity: newQuantity,
+        };
+      }
+      return product;
+    });
+
+    setCountedCart(updatedCart);
+  };
+
+  useEffect(() => {
+    // Function to update countedCart based on the current cart state
+    const updateCountedCart = (cart) => {
+      const idCounts = {};
+
+      // Iterate through the cart array to count IDs
+      for (const product of cart) {
+        const id = product.id;
+        idCounts[id] = (idCounts[id] || 0) + 1;
+      }
+
+      // Create a new array of objects with "id," "title," "price," and "quantity"
+      const countedArray = [];
+      for (const product of cart) {
+        const id = product.id;
+        const title = product.title;
+        const price = product.price;
+        const quantity = idCounts[id];
+
+        // Check if the product with the same ID has already been added to countedArray
+        const existingProduct = countedArray.find((p) => p.id === id);
+
+        if (!existingProduct) {
+          // If not added yet, add it to countedArray
+          countedArray.push({
+            id,
+            title,
+            price,
+            quantity,
+          });
+        }
+      }
+
+      setCountedCart(countedArray);
+    };
+
+    if (cart.length > 0) {
+      updateCountedCart(cart);
+    } else {
+      setCountedCart([]);
+    }
+  }, [cart]);
+
+  return (
+    <div className="container">
+      <h4 className="display-4">Your Cart</h4>
+      {countedCart?.length > 0 ? (
         <div>
-            {cart.length > 0 ? (
-                cart.map((product, index) => (
-                    <div key={product.id + index}>
-                        <p>{product.title} - ${product.price}</p>
-                        <button onClick={() => handleRemoveFromCart(product.id)} className="btn btn-outline-danger d-flex align-items-center p-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
-                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-                            </svg>    
-                        </button>
-                    </div>
-                ))
-            ) : (
-                <h2>Add items to see them in your cart!</h2>
-            )}
+          {countedCart.map((product, index) => (
+            <CartCard
+              product={product}
+              key={`${product.id}-${index}`}
+              handleRemoveFromCart={handleRemoveFromCart}
+              updateQuantity={updateQuantity} // Pass the updateQuantity function as a prop
+            />
+          ))}
+          <h2>Total: ${getTotal().toFixed(2)}</h2>
         </div>
-    )
+      ) : (
+        <h2 className="display-2 text-center">Add items to see them in your cart!</h2>
+      )}
+    </div>
+  );
 }

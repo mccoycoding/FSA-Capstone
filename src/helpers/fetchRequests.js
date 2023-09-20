@@ -1,10 +1,9 @@
 export const URL = "https://fakestoreapi.com"
 
 //GET Products
-export async function fetchAllProducts(page) {
-    const limit = page * 10
+export async function fetchAllProducts() {
     try {
-        const response = await fetch(`${URL}/products?limit=${limit}`);
+        const response = await fetch(`${URL}/products`);
         const result = response.json();
         return result;
     } catch (error) {
@@ -17,8 +16,9 @@ export async function fetchSingleProduct(id) {
     try {
         const response = await fetch(`${URL}/products/${id}`);
         const result = response.json();
+        console.log(result)
         return result;
     } catch (error) {
-        console.error(`ERROR FETCHING ITEM#${id}: ${error}`);
+        console.error(`ERROR FETCHING ITEM #${id}: ${error}`);
     }
 }

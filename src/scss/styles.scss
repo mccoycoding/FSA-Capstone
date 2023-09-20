@@ -1,2 +1,23 @@
 // Import all of Bootstrap's CSS
 @import "bootstrap/scss/bootstrap";
+
+.img-container {
+    width: 100%;
+    height: 200px; /* Fixed height for all images */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.details-img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-container img {
+width: 100%;
+height: 100%;
+object-fit: contain; /* Maintain aspect ratio and add white space */
+}

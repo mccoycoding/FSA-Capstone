@@ -19,7 +19,7 @@ export function addToCart(obj) {
         const cart = getCart() //Should return a cart array of objects or an empty array
         cart.push(obj)
         localStorage.setItem('cart', JSON.stringify(cart))
-        console.log('success')
+        console.log('Successfully added item')
         return true
     } catch (error) {
         console.error('Error adding to cart:', error)
@@ -33,7 +33,7 @@ export function removeItemFromCart(id) {
         const cart = getCart() //Shoudl return a cart array of objects
         const updatedCart = cart.filter(item => item.id !== id)
         localStorage.setItem('cart', JSON.stringify(updatedCart));
-        console.log(`Item removed ${id}`)
+        console.log(`Item removed from cart: ID ${id}`)
         return true
     } catch (error) {
         

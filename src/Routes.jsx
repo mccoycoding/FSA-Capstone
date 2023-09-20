@@ -4,6 +4,8 @@ import Home from "./pages/Home.jsx"
 import Login from "./pages/Login.jsx"
 import Shop from "./pages/Shop.jsx"
 import Cart from "./pages/Cart.jsx"
+import MoreInfo from "./pages/MoreInfo.jsx"
+import ShopGrid from "./components/ShopGrid.jsx"
 
 const rootChilden = [
     {
@@ -17,6 +19,16 @@ const rootChilden = [
     {
         path: "/shop",
         element: <Shop />,
+        children: [
+            {
+                index: true,
+                element: <ShopGrid />
+            },
+            {
+                path: ":itemId",
+                element: <MoreInfo />,
+            }
+        ]
     },
     {
         path: "/checkout",
