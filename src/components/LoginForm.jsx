@@ -24,12 +24,20 @@ export default function LoginForm() {
     }
 
     return (
-        <form onSubmit={(e) => e.preventDefault()}>
-            <label>Username</label>
-            <input type="text" value={username} onChange={e => setUsername(e.target.value)}/>
-            <label>Password</label>
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>
-            <button type="submit" onClick={() => handleClick()}>Login</button>
-        </form>
+        <div className="container text-center">
+            <h2 className="display-3">Log in!</h2>
+            <form onSubmit={(e) => e.preventDefault()}>
+                <div className="form-floating mb-3">
+                    <input className="form-control" id="username" type="text" value={username} onChange={e => setUsername(e.target.value)}/>
+                    <label htmlFor="username">Username</label>
+                </div>
+                <div className="form-floating mb-3">
+                    <input className="form-control" id="passowrd" type="password" value={password} onChange={e => setPassword(e.target.value)}/>
+                    <label htmlFor="password">Password</label>
+                </div>
+                <button className="btn btn-primary" type="submit" onClick={() => handleClick()}>Login</button>
+            </form>
+        </div>
+        
     )
 }
